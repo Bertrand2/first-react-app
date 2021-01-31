@@ -1,8 +1,9 @@
-"use strict";
-
 import React from "react";
-import render from "react-dom";
+import {render} from "react-dom";
 
-import Timer from "../timer";
+import Timer from "./components/timer";
 
-render(<Timer />, document.querySelector("#display"));
+render(
+    <Timer initStatus={"reset"} />,
+    document.querySelector("#pomodoro-holder"),
+);

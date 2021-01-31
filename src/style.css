@@ -18,18 +18,48 @@ body {
   align-items: center;
   width: 100vw;
   max-width: 100%;
-  height: 100vw;
+  height: 100vh;
   max-height: 100%;
 }
 
 .pomodoro {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 20rem;
   height: 20rem;
   background-color: #49a13d;
-  border: 0.2rem solid #173213;
   border-radius: 50%;
+  position: relative;
+}
+.pomodoro__display {
+  font-weight: 800;
+  font-size: 3rem;
+  color: white;
+}
+.pomodoro__list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.pomodoro__item {
+  margin: 0.2rem;
+}
+.pomodoro__button {
+  background-color: #387c2f;
+  color: white;
+  padding: 0.3rem;
+  border: 0.1rem solid white;
+  border-radius: 0.3rem;
+}
+.pomodoro__button:hover {
+  cursor: pointer;
+}
+.pomodoro__loading-bar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }

@@ -25,10 +25,38 @@ body {
 }
 
 .pomodoro {
-	@include flex();
+	@include flex(column);
 	width: 20rem;
 	height: 20rem;
 	background-color: #49a13d;
-	border: 0.2rem solid darken(#49a13d, 30%);
 	border-radius: 50%;
+	position: relative;
+	&__display {
+		font-weight: 800;
+		font-size: 3rem;
+		color: white;
+	}
+	&__list {
+		@include flex();
+	}
+	&__item {
+		margin: 0.2rem;
+	}
+	&__button {
+		background-color: darken(#49a13d, 10%);
+		color: white;
+		padding: 0.3rem;
+		border: 0.1rem solid white;
+		border-radius: 0.3rem;
+		&:hover {
+			cursor: pointer;
+		}
+	}
+	&__loading-bar {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+	}
 }
+
