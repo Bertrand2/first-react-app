@@ -155,7 +155,7 @@ const Timer = () => {
                     <li className={"pomodoro__item"}>
                         <Button
                             onClick={timerReset}
-                            disabled={false}
+                            disabled={status === "reset" ? true : false}
                             large={true}
                             content={"Reset"}
                         />
