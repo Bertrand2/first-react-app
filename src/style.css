@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "lazer";
+  src: url("./fonts/Lazer84.ttf") format("truetype");
+}
 * {
   margin: 0;
   padding: 0;
@@ -20,6 +24,38 @@ body {
   max-width: 100%;
   height: 100vh;
   max-height: 100%;
+  background: linear-gradient(#290CFF, #FF019A);
+  overflow: hidden;
+}
+
+#header {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4rem;
+  margin-left: 1.5rem;
+}
+
+.title {
+  top: 0;
+  position: absolute;
+  color: #FF019A;
+  font-family: lazer;
+  z-index: 2;
+  animation: neonTitle 0.8s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+.title:hover {
+  cursor: pointer;
+}
+
+.smashed {
+  animation: smashed 8s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
 }
 
 .pomodoro {
@@ -29,14 +65,23 @@ body {
   align-items: center;
   width: 20rem;
   height: 20rem;
-  background-color: #49a13d;
+  background-color: #0161E8;
+  border: 0.1rem solid #9B00E8;
   border-radius: 50%;
+  box-shadow: 0.8rem 0.8rem 1.2rem black;
   position: relative;
+  transition: box-shadow 0.6s;
+}
+.pomodoro:hover {
+  box-shadow: 0.6rem 0.6rem 1.2rem black;
 }
 .pomodoro__display {
   font-weight: 800;
   font-size: 3rem;
-  color: white;
+  font-family: lazer;
+  letter-spacing: 0.6rem;
+  text-shadow: 0.2rem 0.2rem 0.5rem black;
+  color: gold;
 }
 .pomodoro__list {
   display: flex;
@@ -48,18 +93,191 @@ body {
   margin: 0.2rem;
 }
 .pomodoro__button {
-  background-color: #387c2f;
-  color: white;
-  padding: 0.3rem;
-  border: 0.1rem solid white;
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #9B00E8;
+  color: gold;
+  border: 0.1rem solid #ccac00;
   border-radius: 0.3rem;
+  box-shadow: 0.2rem 0.2rem 0.5rem black;
 }
 .pomodoro__button:hover {
   cursor: pointer;
+  box-shadow: 0.1rem 0.1rem 0.3rem black;
+  animation: neon 1s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+.pomodoro .large {
+  width: 5rem;
 }
 .pomodoro__loading-bar {
   position: absolute;
   width: 100%;
   height: 100%;
   pointer-events: none;
+  stroke: gold;
+  filter: drop-shadow(0.1rem 0.1rem 0.3rem black);
+}
+
+/* ANIMATIONS */
+@keyframes neon {
+  0% {
+    background-color: #9B00E8;
+    border: 0.1rem solid #ccac00;
+    box-shadow: -0.1rem 0 0.1rem gold, 0 0.1rem 0.1rem gold, 0.1rem 0 0.1rem gold, 0 -0.1rem 0.1rem gold;
+    color: #998100;
+    text-shadow: none;
+  }
+  30% {
+    background-color: #FF019A;
+    border: 0.1rem solid gold;
+    box-shadow: -0.1rem 0 0.1rem gold, 0 0.1rem 0.1rem gold, 0.1rem 0 0.1rem gold, 0 -0.1rem 0.1rem gold;
+    color: #ccac00;
+    text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
+  }
+  65% {
+    background-color: #FF019A;
+    border: 0.1rem solid gold;
+    box-shadow: -0.1rem 0 0.1rem gold, 0 0.1rem 0.1rem gold, 0.1rem 0 0.1rem gold, 0 -0.1rem 0.1rem gold;
+    color: #ccac00;
+    text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
+  }
+  70% {
+    background-color: #9B00E8;
+    border: 0.1rem solid #ccac00;
+    box-shadow: -0.1rem 0 0.1rem gold, 0 0.1rem 0.1rem gold, 0.1rem 0 0.1rem gold, 0 -0.1rem 0.1rem gold;
+    color: #998100;
+    text-shadow: none;
+  }
+  80% {
+    background-color: #9B00E8;
+    border: 0.1rem solid #ccac00;
+    box-shadow: -0.1rem 0 0.1rem gold, 0 0.1rem 0.1rem gold, 0.1rem 0 0.1rem gold, 0 -0.1rem 0.1rem gold;
+    color: #998100;
+    text-shadow: none;
+  }
+  82% {
+    background-color: #FF019A;
+    border: 0.1rem solid gold;
+    box-shadow: -0.1rem 0 0.1rem gold, 0 0.1rem 0.1rem gold, 0.1rem 0 0.1rem gold, 0 -0.1rem 0.1rem gold;
+    color: #ccac00;
+    text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
+  }
+  95% {
+    background-color: #FF019A;
+    border: 0.1rem solid gold;
+    box-shadow: -0.1rem 0 0.1rem gold, 0 0.1rem 0.1rem gold, 0.1rem 0 0.1rem gold, 0 -0.1rem 0.1rem gold;
+    color: #ccac00;
+    text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
+  }
+  96% {
+    background-color: #9B00E8;
+    border: 0.1rem solid #ccac00;
+    box-shadow: -0.1rem 0 0.1rem gold, 0 0.1rem 0.1rem gold, 0.1rem 0 0.1rem gold, 0 -0.1rem 0.1rem gold;
+    color: #998100;
+    text-shadow: none;
+  }
+  100% {
+    background-color: #FF019A;
+    border: 0.1rem solid gold;
+    box-shadow: -0.1rem 0 0.1rem gold, 0 0.1rem 0.1rem gold, 0.1rem 0 0.1rem gold, 0 -0.1rem 0.1rem gold;
+    color: #ccac00;
+    text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
+  }
+}
+@keyframes neonTitle {
+  0% {
+    text-shadow: none;
+  }
+  30% {
+    text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
+  }
+  65% {
+    text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
+  }
+  70% {
+    text-shadow: none;
+  }
+  80% {
+    text-shadow: none;
+  }
+  82% {
+    text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
+  }
+  95% {
+    text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
+  }
+  96% {
+    text-shadow: none;
+  }
+  100% {
+    text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
+  }
+}
+@keyframes smashed {
+  0% {
+    transform-origin: top left;
+    text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
+  }
+  15% {
+    transform: rotateZ(130deg);
+    transform-origin: top left;
+  }
+  24% {
+    transform: rotateZ(64deg);
+    transform-origin: top left;
+    text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
+  }
+  25% {
+    transform: rotateZ(65deg);
+    transform-origin: top left;
+    text-shadow: none;
+  }
+  34% {
+    transform: rotateZ(110deg);
+    transform-origin: top left;
+    text-shadow: none;
+  }
+  35% {
+    transform: rotateZ(110deg);
+    transform-origin: top left;
+    text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
+  }
+  45% {
+    transform: rotateZ(75deg);
+    transform-origin: top left;
+    text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
+  }
+  46% {
+    transform: rotateZ(76deg);
+    transform-origin: top left;
+    text-shadow: none;
+  }
+  53% {
+    transform: rotateZ(86deg);
+    transform-origin: top left;
+    top: 0;
+  }
+  65% {
+    transform: rotateZ(85deg);
+    transform-origin: top left;
+    top: 0;
+  }
+  80% {
+    transform: rotateZ(85deg);
+    transform-origin: top left;
+    top: 0;
+    text-shadow: none;
+  }
+  100% {
+    transform: rotateZ(85deg);
+    transform-origin: top left;
+    top: 200vh;
+    text-shadow: none;
+  }
 }

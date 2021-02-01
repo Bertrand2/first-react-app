@@ -1,9 +1,21 @@
+@font-face {
+    font-family: "lazer";
+    src: url("./fonts/Lazer84.ttf") format("truetype");
+}
+
 @mixin flex($direction : row, $justify : center, $align : center) {
 	display: flex;
 	flex-direction: $direction;
 	justify-content: $justify;
 	align-items: $align;
 }
+
+$color-background: #290CFF;
+$color-clock: #0161E8;
+$color-text: #00F1FF;
+$color-border: #9B00E8;
+$color-secondary: #FF019A;
+$color-tertiary: gold;
 
 * {
 	margin: 0;
@@ -22,19 +34,62 @@ body {
 	max-width: 100%;
 	height: 100vh;
 	max-height: 100%;
+	background: linear-gradient($color-background, $color-secondary);
+	overflow: hidden;
+}
+
+#header {
+	position: relative;
+	@include flex();
+	margin-bottom: 4rem;
+	margin-left: 1.5rem;
+}
+.title {
+	top: 0;
+	position: absolute;
+	color: $color-secondary;
+	font-family: lazer;
+	// text-shadow: 
+	// 	-0.2rem 0 $color-tertiary, 
+	// 	0 0.2rem $color-tertiary, 
+	// 	0.2rem 0 $color-tertiary, 
+	// 	0 -0.2rem $color-tertiary,
+	// 	0.8rem 0.8rem 1.2rem black;
+	z-index: 2;
+	animation: neonTitle 0.8s;
+	animation-fill-mode: forwards;
+	animation-timing-function: linear;
+	&:hover {
+		cursor: pointer;
+	}
+}
+.smashed {
+	animation: smashed 8s;
+	animation-fill-mode: forwards;
+	animation-timing-function: ease-in-out;
+	// animation: 
 }
 
 .pomodoro {
 	@include flex(column);
 	width: 20rem;
 	height: 20rem;
-	background-color: #49a13d;
+	background-color: $color-clock;
+	border: 0.1rem solid $color-border;
 	border-radius: 50%;
+	box-shadow: 0.8rem 0.8rem 1.2rem black;
 	position: relative;
+	transition: box-shadow 0.6s;
+	&:hover {
+		box-shadow: 0.6rem 0.6rem 1.2rem black;
+	}
 	&__display {
 		font-weight: 800;
 		font-size: 3rem;
-		color: white;
+		font-family: lazer;
+		letter-spacing: 0.6rem;
+		text-shadow: 0.2rem 0.2rem 0.5rem black;
+		color: $color-tertiary;
 	}
 	&__list {
 		@include flex();
@@ -43,20 +98,200 @@ body {
 		margin: 0.2rem;
 	}
 	&__button {
-		background-color: darken(#49a13d, 10%);
-		color: white;
-		padding: 0.3rem;
-		border: 0.1rem solid white;
+		height: 2rem;
+		width: 2rem;
+		@include flex();
+		background-color: $color-border;
+		color: $color-tertiary;
+		border: 0.1rem solid darken($color-tertiary, 10%);
 		border-radius: 0.3rem;
+		// transition: all 0.6s;
+		box-shadow: 0.2rem 0.2rem 0.5rem black;
 		&:hover {
 			cursor: pointer;
+			box-shadow: 0.1rem 0.1rem 0.3rem black;
+			animation: neon 1s;
+			animation-fill-mode: forwards;
+			animation-timing-function: linear;
 		}
+	}
+	.large {
+		width: 5rem;
 	}
 	&__loading-bar {
 		position: absolute;
 		width: 100%;
 		height: 100%;
 		pointer-events: none;
+		stroke: $color-tertiary;
+		filter: drop-shadow(0.1rem 0.1rem 0.3rem black);
 	}
 }
 
+
+/* ANIMATIONS */
+
+@mixin neonTextOn($button){
+	@if $button {
+		color: darken($color-tertiary, 10%);
+	}
+	text-shadow: 
+		-0.1rem 0 0.2rem $color-tertiary, 
+		0 0.1rem 0.2rem $color-tertiary, 
+		0.1rem 0 0.2rem $color-tertiary, 
+		0 -0.1rem 0.2rem $color-tertiary;
+}
+@mixin neonTextOff($button){
+	@if $button {
+		color: darken($color-tertiary, 20%);
+	}
+	text-shadow: none;
+}
+@mixin neonBoxOn(){
+	background-color: $color-secondary;
+	border: 0.1rem solid $color-tertiary;
+	box-shadow: 
+		-0.1rem 0 0.1rem $color-tertiary, 
+		0 0.1rem 0.1rem $color-tertiary, 
+		0.1rem 0 0.1rem $color-tertiary, 
+		0 -0.1rem 0.1rem $color-tertiary;
+}
+@mixin neonBoxOff(){
+	background-color: $color-border;
+	border: 0.1rem solid darken($color-tertiary, 10%);
+	box-shadow: 
+		-0.1rem 0 0.1rem $color-tertiary, 
+		0 0.1rem 0.1rem $color-tertiary, 
+		0.1rem 0 0.1rem $color-tertiary, 
+		0 -0.1rem 0.1rem $color-tertiary;
+}
+
+@keyframes neon{
+	0% {
+		@include neonBoxOff();
+		@include neonTextOff($button: true);
+	}
+	30% {
+		@include neonBoxOn();
+		@include neonTextOn($button: true);
+	}
+	65% {
+		@include neonBoxOn();
+		@include neonTextOn($button: true);
+	}
+	70% {
+		@include neonBoxOff();
+		@include neonTextOff($button: true);
+	}
+	80% {
+		@include neonBoxOff();
+		@include neonTextOff($button: true);
+	}
+	82% {
+		@include neonBoxOn();
+		@include neonTextOn($button: true);
+	}
+	95% {
+		@include neonBoxOn();
+		@include neonTextOn($button: true);
+	}
+	96% {
+		@include neonBoxOff();
+		@include neonTextOff($button: true);
+	}
+	100% {
+		@include neonBoxOn();
+		@include neonTextOn($button: true);
+	}
+}
+@keyframes neonTitle{
+	0% {
+		@include neonTextOff($button: false);
+	}
+	30% {
+		@include neonTextOn($button: false);
+	}
+	65% {
+		@include neonTextOn($button: false);
+	}
+	70% {
+		@include neonTextOff($button: false);
+	}
+	80% {
+		@include neonTextOff($button: false);
+	}
+	82% {
+		@include neonTextOn($button: false);
+	}
+	95% {
+		@include neonTextOn($button: false);
+	}
+	96% {
+		@include neonTextOff($button: false);
+	}
+	100% {
+		@include neonTextOn($button: false);
+	}
+}
+@keyframes smashed{
+	0% {
+		transform-origin: top left;
+		@include neonTextOn($button: false);
+	}
+	15% {
+		transform: rotateZ(130deg);
+		transform-origin: top left;
+	}
+	24% {
+		transform: rotateZ(64deg);
+		transform-origin: top left;
+		@include neonTextOn($button: false);
+	}
+	25% {
+		transform: rotateZ(65deg);
+		transform-origin: top left;
+		@include neonTextOff($button: false);
+	}
+	34% {
+		transform: rotateZ(110deg);
+		transform-origin: top left;
+		@include neonTextOff($button: false);
+	}
+	35% {
+		transform: rotateZ(110deg);
+		transform-origin: top left;
+		@include neonTextOn($button: false);
+	}
+	45% {
+		transform: rotateZ(75deg);
+		transform-origin: top left;
+		@include neonTextOn($button: false);
+	}
+	46% {
+		transform: rotateZ(76deg);
+		transform-origin: top left;
+		@include neonTextOff($button: false);
+	}
+	53% {
+		transform: rotateZ(86deg);
+		transform-origin: top left;
+		top: 0;
+	}
+	65% {
+		transform: rotateZ(85deg);
+		transform-origin: top left;
+		top: 0;
+	}
+	80% {
+		transform: rotateZ(85deg);
+		transform-origin: top left;
+		top: 0;
+		@include neonTextOff($button: false);
+	}
+	100% {
+		transform: rotateZ(85deg);
+		transform-origin: top left;
+		top: 200vh;
+		@include neonTextOff($button: false);
+	}
+}

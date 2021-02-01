@@ -26,7 +26,7 @@ const Timer = () => {
     const renderArc = (size, width) => {
         const radius = size / 2;
         const center = radius + width;
-        const angle = 2 * Math.PI * (remainingTime / (maxTime + 0.1));
+        const angle = 2 * Math.PI * (remainingTime / (maxTime + 0.01));
         return [
             "M",
             center,
@@ -87,15 +87,17 @@ const Timer = () => {
             <ul className={"pomodoro__list"}>
                 <li className={"pomodoro__item"}>
                     <Button
-                        onClick={timerAugment}
+                        onClick={timerReduce}
                         disabled={status === "play" ? true : false}
-                        content={"+"}
+                        large={false}
+                        content={"-"}
                     />
                 </li>
                 <li className={"pomodoro__item"}>
                     <Button
                         onClick={timerStartStop}
                         disabled={false}
+                        large={true}
                         content={buttonContent}
                     />
                 </li>
@@ -103,24 +105,21 @@ const Timer = () => {
                     <Button
                         onClick={timerReset}
                         disabled={false}
+                        large={true}
                         content={"Reset"}
                     />
                 </li>
                 <li className={"pomodoro__item"}>
                     <Button
-                        onClick={timerReduce}
+                        onClick={timerAugment}
                         disabled={status === "play" ? true : false}
-                        content={"-"}
+                        large={false}
+                        content={"+"}
                     />
                 </li>
             </ul>
             <LoadingBar
-                arc={renderArc(
-                    remainingTime,
-                    maxTime,
-                    loadingBar.size,
-                    loadingBar.width,
-                )}
+                arc={renderArc(loadingBar.size, loadingBar.width)}
                 size={loadingBar.size}
                 width={loadingBar.width}
             />

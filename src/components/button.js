@@ -1,10 +1,10 @@
 import React from "react";
 
-const Button = ({disabled, content, onClick: handleClick}) => (
+const Button = ({disabled, large, content, onClick: handleClick}) => (
     <button
         type={"button"}
         onClick={handleClick}
-        className={"pomodoro__button"}
+        className={`pomodoro__button ${large ? "large" : ""}`}
         disabled={disabled}>
         {content}
     </button>
