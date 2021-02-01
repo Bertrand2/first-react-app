@@ -26,7 +26,10 @@ const Timer = () => {
     const renderArc = (size, width) => {
         const radius = size / 2;
         const center = radius + width;
-        const angle = 2 * Math.PI * (remainingTime / (maxTime + 0.01));
+        const angle =
+            remainingTime > maxTime
+                ? 2 * Math.PI - 0.01
+                : 2 * Math.PI * (remainingTime / (maxTime + 0.01));
         return [
             "M",
             center,
@@ -64,9 +67,9 @@ const Timer = () => {
         }
     };
     const timerReduce = () => {
-        if (status === "pause" && remainingTime >= 60) {
+        if (status === "pause" && remainingTime > 60) {
             setRemainingTime(remainingTime - 60);
-        } else if (status === "reset" && maxTime >= 60) {
+        } else if (status === "reset" && maxTime > 60) {
             setMaxTime(maxTime - 60);
             setRemainingTime(remainingTime - 60);
         }

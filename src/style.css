@@ -8,7 +8,7 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 125%;
 }
 
 ul, ol {
@@ -95,6 +95,8 @@ body {
 .pomodoro__button {
   height: 2rem;
   width: 2rem;
+  font-size: 1rem;
+  font-weight: 600;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -129,63 +131,63 @@ body {
   0% {
     background-color: #9B00E8;
     border: 0.1rem solid #ccac00;
-    box-shadow: -0.1rem 0 0.1rem gold, 0 0.1rem 0.1rem gold, 0.1rem 0 0.1rem gold, 0 -0.1rem 0.1rem gold;
+    box-shadow: 0 0rem 0.5rem gold;
     color: #998100;
     text-shadow: none;
   }
   30% {
     background-color: #FF019A;
     border: 0.1rem solid gold;
-    box-shadow: -0.1rem 0 0.1rem gold, 0 0.1rem 0.1rem gold, 0.1rem 0 0.1rem gold, 0 -0.1rem 0.1rem gold;
+    box-shadow: 0 0rem 0.5rem gold;
     color: #ccac00;
     text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
   }
   65% {
     background-color: #FF019A;
     border: 0.1rem solid gold;
-    box-shadow: -0.1rem 0 0.1rem gold, 0 0.1rem 0.1rem gold, 0.1rem 0 0.1rem gold, 0 -0.1rem 0.1rem gold;
+    box-shadow: 0 0rem 0.5rem gold;
     color: #ccac00;
     text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
   }
   70% {
     background-color: #9B00E8;
     border: 0.1rem solid #ccac00;
-    box-shadow: -0.1rem 0 0.1rem gold, 0 0.1rem 0.1rem gold, 0.1rem 0 0.1rem gold, 0 -0.1rem 0.1rem gold;
+    box-shadow: 0 0rem 0.5rem gold;
     color: #998100;
     text-shadow: none;
   }
   80% {
     background-color: #9B00E8;
     border: 0.1rem solid #ccac00;
-    box-shadow: -0.1rem 0 0.1rem gold, 0 0.1rem 0.1rem gold, 0.1rem 0 0.1rem gold, 0 -0.1rem 0.1rem gold;
+    box-shadow: 0 0rem 0.5rem gold;
     color: #998100;
     text-shadow: none;
   }
   82% {
     background-color: #FF019A;
     border: 0.1rem solid gold;
-    box-shadow: -0.1rem 0 0.1rem gold, 0 0.1rem 0.1rem gold, 0.1rem 0 0.1rem gold, 0 -0.1rem 0.1rem gold;
+    box-shadow: 0 0rem 0.5rem gold;
     color: #ccac00;
     text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
   }
   95% {
     background-color: #FF019A;
     border: 0.1rem solid gold;
-    box-shadow: -0.1rem 0 0.1rem gold, 0 0.1rem 0.1rem gold, 0.1rem 0 0.1rem gold, 0 -0.1rem 0.1rem gold;
+    box-shadow: 0 0rem 0.5rem gold;
     color: #ccac00;
     text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
   }
   96% {
     background-color: #9B00E8;
     border: 0.1rem solid #ccac00;
-    box-shadow: -0.1rem 0 0.1rem gold, 0 0.1rem 0.1rem gold, 0.1rem 0 0.1rem gold, 0 -0.1rem 0.1rem gold;
+    box-shadow: 0 0rem 0.5rem gold;
     color: #998100;
     text-shadow: none;
   }
   100% {
     background-color: #FF019A;
     border: 0.1rem solid gold;
-    box-shadow: -0.1rem 0 0.1rem gold, 0 0.1rem 0.1rem gold, 0.1rem 0 0.1rem gold, 0 -0.1rem 0.1rem gold;
+    box-shadow: 0 0rem 0.5rem gold;
     color: #ccac00;
     text-shadow: -0.1rem 0 0.2rem gold, 0 0.1rem 0.2rem gold, 0.1rem 0 0.2rem gold, 0 -0.1rem 0.2rem gold;
   }

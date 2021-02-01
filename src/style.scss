@@ -22,7 +22,7 @@ $color-tertiary: gold;
 	padding: 0;
 }
 html {
-	font-size: 62.5%;
+	font-size: 125%;
 }
 ul, ol {
 	list-style: none;
@@ -100,6 +100,8 @@ body {
 	&__button {
 		height: 2rem;
 		width: 2rem;
+		font-size: 1rem;
+		font-weight: 600;
 		@include flex();
 		background-color: $color-border;
 		color: $color-tertiary;
@@ -150,20 +152,12 @@ body {
 @mixin neonBoxOn(){
 	background-color: $color-secondary;
 	border: 0.1rem solid $color-tertiary;
-	box-shadow: 
-		-0.1rem 0 0.1rem $color-tertiary, 
-		0 0.1rem 0.1rem $color-tertiary, 
-		0.1rem 0 0.1rem $color-tertiary, 
-		0 -0.1rem 0.1rem $color-tertiary;
+	box-shadow: 0 0rem 0.5rem $color-tertiary;
 }
 @mixin neonBoxOff(){
 	background-color: $color-border;
 	border: 0.1rem solid darken($color-tertiary, 10%);
-	box-shadow: 
-		-0.1rem 0 0.1rem $color-tertiary, 
-		0 0.1rem 0.1rem $color-tertiary, 
-		0.1rem 0 0.1rem $color-tertiary, 
-		0 -0.1rem 0.1rem $color-tertiary;
+	box-shadow: 0 0rem 0.5rem $color-tertiary;
 }
 
 @keyframes neon{
