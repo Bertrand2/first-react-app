@@ -6,7 +6,7 @@ const Title = () => {
     };
     return (
         <h1 className={"title"} onClick={smash}>
-            {"Pomodoro"}
+            {"Retromodoro"}
         </h1>
     );
 };

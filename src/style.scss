@@ -22,7 +22,7 @@ $color-tertiary: gold;
 	padding: 0;
 }
 html {
-	font-size: 125%;
+	font-size: 110%;
 }
 ul, ol {
 	list-style: none;
@@ -64,7 +64,7 @@ body {
 	}
 }
 .smashed {
-	animation: smashed 8s;
+	animation: smashed 6s;
 	animation-fill-mode: forwards;
 	animation-timing-function: ease-in-out;
 	// animation: 
@@ -77,11 +77,12 @@ body {
 	background-color: $color-clock;
 	border: 0.1rem solid $color-border;
 	border-radius: 50%;
-	box-shadow: 0.8rem 0.8rem 1.2rem black;
+	box-shadow: 0.4rem 0.4rem 0.3 black;
 	position: relative;
-	transition: box-shadow 0.6s;
+	transition: box-shadow 0.6s, scale 0.6s;
 	&:hover {
-		box-shadow: 0.6rem 0.6rem 1.2rem black;
+		box-shadow: 1rem 1rem 1.2rem black;
+		scale: 1.01;
 	}
 	&__display {
 		font-weight: 800;
@@ -107,7 +108,6 @@ body {
 		color: $color-tertiary;
 		border: 0.1rem solid darken($color-tertiary, 10%);
 		border-radius: 0.3rem;
-		// transition: all 0.6s;
 		box-shadow: 0.2rem 0.2rem 0.5rem black;
 		&:hover {
 			cursor: pointer;
@@ -116,9 +116,23 @@ body {
 			animation-fill-mode: forwards;
 			animation-timing-function: linear;
 		}
+		&:disabled {
+			animation: none;
+			box-shadow: none;
+			filter: grayscale(0.8);
+		}
 	}
 	.large {
 		width: 5rem;
+	}
+	&__work-status {
+		font-weight: 800;
+		font-size: 1.2rem;
+		font-family: lazer;
+		letter-spacing: 0.1rem;
+		text-shadow: 0.1rem 0.1rem 0.4rem black;
+		color: $color-tertiary;
+		margin-top: 1rem;
 	}
 	&__loading-bar {
 		position: absolute;
@@ -129,7 +143,26 @@ body {
 		filter: drop-shadow(0.1rem 0.1rem 0.3rem black);
 	}
 }
-
+.panel {
+	@include flex(column);
+	margin-top: 1rem;
+	&__list {
+		@include flex();
+		margin: 0.2rem;
+	}
+	&__button {
+		width: 2rem;
+		height: 2rem;
+	}
+	&__content {
+		width: 10rem;
+		@include flex();
+	}
+	&__text {
+		font-family: lazer;
+		color: $color-tertiary;
+	}
+}
 
 /* ANIMATIONS */
 

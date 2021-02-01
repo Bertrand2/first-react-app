@@ -8,7 +8,7 @@
 }
 
 html {
-  font-size: 125%;
+  font-size: 110%;
 }
 
 ul, ol {
@@ -53,7 +53,7 @@ body {
 }
 
 .smashed {
-  animation: smashed 8s;
+  animation: smashed 6s;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in-out;
 }
@@ -68,12 +68,13 @@ body {
   background-color: #0161E8;
   border: 0.1rem solid #9B00E8;
   border-radius: 50%;
-  box-shadow: 0.8rem 0.8rem 1.2rem black;
+  box-shadow: 0.4rem 0.4rem 0.3 black;
   position: relative;
-  transition: box-shadow 0.6s;
+  transition: box-shadow 0.6s, scale 0.6s;
 }
 .pomodoro:hover {
-  box-shadow: 0.6rem 0.6rem 1.2rem black;
+  box-shadow: 1rem 1rem 1.2rem black;
+  scale: 1.01;
 }
 .pomodoro__display {
   font-weight: 800;
@@ -114,8 +115,22 @@ body {
   animation-fill-mode: forwards;
   animation-timing-function: linear;
 }
+.pomodoro__button:disabled {
+  animation: none;
+  box-shadow: none;
+  filter: grayscale(0.8);
+}
 .pomodoro .large {
   width: 5rem;
+}
+.pomodoro__work-status {
+  font-weight: 800;
+  font-size: 1.2rem;
+  font-family: lazer;
+  letter-spacing: 0.1rem;
+  text-shadow: 0.1rem 0.1rem 0.4rem black;
+  color: gold;
+  margin-top: 1rem;
 }
 .pomodoro__loading-bar {
   position: absolute;
@@ -124,6 +139,36 @@ body {
   pointer-events: none;
   stroke: gold;
   filter: drop-shadow(0.1rem 0.1rem 0.3rem black);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+.panel__list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0.2rem;
+}
+.panel__button {
+  width: 2rem;
+  height: 2rem;
+}
+.panel__content {
+  width: 10rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.panel__text {
+  font-family: lazer;
+  color: gold;
 }
 
 /* ANIMATIONS */

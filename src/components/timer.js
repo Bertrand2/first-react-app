@@ -5,10 +5,17 @@ import Button from "./button";
 import LoadingBar from "./loading-bar";
 
 const Timer = () => {
-    const defaultTime = 300;
+    const defaultWorkTime = 1500;
+    const defaultBreakTime = 300;
+    const defaultCycles = 3;
+    const defaultTime = (defaultWorkTime + defaultBreakTime) * defaultCycles;
+    const [workTime, setWorkTime] = useState(defaultWorkTime);
+    const [breakTime, setBreakTime] = useState(defaultBreakTime);
+    const [cycles, setCycles] = useState(defaultCycles);
     const [maxTime, setMaxTime] = useState(defaultTime);
     const [remainingTime, setRemainingTime] = useState(defaultTime);
     const [status, setStatus] = useState("reset");
+    const [workStatus, setWorkStatus] = useState("Work  Time !");
     let buttonContent;
     const loadingBar = {
         size: 32,
@@ -28,7 +35,7 @@ const Timer = () => {
         const center = radius + width;
         const angle =
             remainingTime > maxTime
-                ? 2 * Math.PI - 0.01
+                ? 2 * Math.PI - 0.001
                 : 2 * Math.PI * (remainingTime / (maxTime + 0.01));
         return [
             "M",
@@ -46,6 +53,11 @@ const Timer = () => {
     };
     const decrementTime = () => {
         remainingTime && setRemainingTime(remainingTime - 1);
+        setWorkStatus(
+            (remainingTime - 1) % (breakTime + workTime) <= breakTime
+                ? "Break  Time !"
+                : "Work  Time !",
+        );
     };
     const timerStartStop = () => {
         if (status === "pause" || status === "reset") {
@@ -74,6 +86,36 @@ const Timer = () => {
             setRemainingTime(remainingTime - 60);
         }
     };
+    const workTimeAugment = () => {
+        if (status === "reset") {
+            setWorkTime(workTime + 60);
+        }
+    };
+    const workTimeReduce = () => {
+        if (status === "reset" && workTime > 60) {
+            setWorkTime(workTime - 60);
+        }
+    };
+    const breakTimeAugment = () => {
+        if (status === "reset") {
+            setBreakTime(breakTime + 60);
+        }
+    };
+    const breakTimeReduce = () => {
+        if (status === "reset" && breakTime > 60) {
+            setBreakTime(breakTime - 60);
+        }
+    };
+    const cyclesAugment = () => {
+        if (status === "reset") {
+            setCycles(cycles + 1);
+        }
+    };
+    const cyclesReduce = () => {
+        if (status === "reset" && cycles > 1) {
+            setCycles(cycles - 1);
+        }
+    };
 
     useEffect(() => {
         let timerInterval;
@@ -84,49 +126,131 @@ const Timer = () => {
         return () => clearInterval(timerInterval);
     }, [status, remainingTime]);
 
+    useEffect(() => {
+        setRemainingTime((workTime + breakTime) * cycles);
+        setMaxTime((workTime + breakTime) * cycles);
+    }, [workTime, breakTime, cycles]);
+
     return (
-        <div className={"pomodoro"}>
-            <Display time={status === "reset" ? maxTime : remainingTime} />
-            <ul className={"pomodoro__list"}>
-                <li className={"pomodoro__item"}>
-                    <Button
-                        onClick={timerReduce}
-                        disabled={status === "play" ? true : false}
-                        large={false}
-                        content={"-"}
-                    />
-                </li>
-                <li className={"pomodoro__item"}>
-                    <Button
-                        onClick={timerStartStop}
-                        disabled={false}
-                        large={true}
-                        content={buttonContent}
-                    />
-                </li>
-                <li className={"pomodoro__item"}>
-                    <Button
-                        onClick={timerReset}
-                        disabled={false}
-                        large={true}
-                        content={"Reset"}
-                    />
-                </li>
-                <li className={"pomodoro__item"}>
-                    <Button
-                        onClick={timerAugment}
-                        disabled={status === "play" ? true : false}
-                        large={false}
-                        content={"+"}
-                    />
-                </li>
-            </ul>
-            <LoadingBar
-                arc={renderArc(loadingBar.size, loadingBar.width)}
-                size={loadingBar.size}
-                width={loadingBar.width}
-            />
-        </div>
+        <>
+            <div className={"pomodoro"}>
+                <Display time={status === "reset" ? maxTime : remainingTime} />
+                <ul className={"pomodoro__list"}>
+                    <li className={"pomodoro__item"}>
+                        <Button
+                            onClick={timerReduce}
+                            disabled={status === "pause" ? false : true}
+                            large={false}
+                            content={"-"}
+                        />
+                    </li>
+                    <li className={"pomodoro__item"}>
+                        <Button
+                            onClick={timerStartStop}
+                            disabled={false}
+                            large={true}
+                            content={buttonContent}
+                        />
+                    </li>
+                    <li className={"pomodoro__item"}>
+                        <Button
+                            onClick={timerReset}
+                            disabled={false}
+                            large={true}
+                            content={"Reset"}
+                        />
+                    </li>
+                    <li className={"pomodoro__item"}>
+                        <Button
+                            onClick={timerAugment}
+                            disabled={status === "pause" ? false : true}
+                            large={false}
+                            content={"+"}
+                        />
+                    </li>
+                </ul>
+                <h2 className={"pomodoro__work-status"}>{workStatus}</h2>
+                <LoadingBar
+                    arc={renderArc(loadingBar.size, loadingBar.width)}
+                    size={loadingBar.size}
+                    width={loadingBar.width}
+                />
+            </div>
+            <div className={"panel"}>
+                <ul className={"panel__list"}>
+                    <li className={"panel__button"}>
+                        <Button
+                            onClick={workTimeReduce}
+                            disabled={status === "reset" ? false : true}
+                            large={false}
+                            content={"-"}
+                        />
+                    </li>
+                    <li className={"panel__content"}>
+                        <p className={"panel__text"}>
+                            {"Work  time : "}
+                            {Math.floor(workTime / 60)}
+                        </p>
+                    </li>
+                    <li className={"panel__button"}>
+                        <Button
+                            onClick={workTimeAugment}
+                            disabled={status === "reset" ? false : true}
+                            large={false}
+                            content={"+"}
+                        />
+                    </li>
+                </ul>
+                <ul className={"panel__list"}>
+                    <li className={"panel__button"}>
+                        <Button
+                            onClick={breakTimeReduce}
+                            disabled={status === "reset" ? false : true}
+                            large={false}
+                            content={"-"}
+                        />
+                    </li>
+                    <li className={"panel__content"}>
+                        <p className={"panel__text"}>
+                            {"Break  time : "}
+                            {Math.floor(breakTime / 60)}
+                        </p>
+                    </li>
+                    <li className={"panel__button"}>
+                        <Button
+                            onClick={breakTimeAugment}
+                            disabled={status === "reset" ? false : true}
+                            large={false}
+                            content={"+"}
+                        />
+                    </li>
+                </ul>
+                <ul className={"panel__list"}>
+                    <li className={"panel__button"}>
+                        <Button
+                            onClick={cyclesReduce}
+                            disabled={status === "reset" ? false : true}
+                            large={false}
+                            content={"-"}
+                        />
+                    </li>
+                    <li className={"panel__content"}>
+                        <p className={"panel__text"}>
+                            {"Cycles : "}
+                            {cycles}
+                        </p>
+                    </li>
+                    <li className={"panel__button"}>
+                        <Button
+                            onClick={cyclesAugment}
+                            disabled={status === "reset" ? false : true}
+                            large={false}
+                            content={"+"}
+                        />
+                    </li>
+                </ul>
+            </div>
+        </>
     );
 };
 
