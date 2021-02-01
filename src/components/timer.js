@@ -138,10 +138,10 @@ const Timer = () => {
                 <ul className={"pomodoro__list"}>
                     <li className={"pomodoro__item"}>
                         <Button
-                            onClick={timerReduce}
+                            onClick={timerAugment}
                             disabled={status === "pause" ? false : true}
                             large={false}
-                            content={"-"}
+                            content={"◀◀"}
                         />
                     </li>
                     <li className={"pomodoro__item"}>
@@ -162,10 +162,10 @@ const Timer = () => {
                     </li>
                     <li className={"pomodoro__item"}>
                         <Button
-                            onClick={timerAugment}
+                            onClick={timerReduce}
                             disabled={status === "pause" ? false : true}
                             large={false}
-                            content={"+"}
+                            content={"▶▶"}
                         />
                     </li>
                 </ul>
