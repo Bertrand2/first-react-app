@@ -125,11 +125,11 @@ const Timer = () => {
         );
         if (remainingTime === 0) {
             audioEnd.play();
+            timerReset();
         } else if (remainingTime % (breakTime + workTime) === breakTime) {
             audioBreak.play();
         } else if (remainingTime % (breakTime + workTime) === 0) {
             audioWork.play();
-            timerReset();
         }
     };
 
