@@ -49,14 +49,8 @@ body {
 	position: absolute;
 	color: $color-secondary;
 	font-family: lazer;
-	// text-shadow: 
-	// 	-0.2rem 0 $color-tertiary, 
-	// 	0 0.2rem $color-tertiary, 
-	// 	0.2rem 0 $color-tertiary, 
-	// 	0 -0.2rem $color-tertiary,
-	// 	0.8rem 0.8rem 1.2rem black;
 	z-index: 2;
-	animation: neonTitle 0.8s;
+	animation: neonTitle 2s;
 	animation-fill-mode: forwards;
 	animation-timing-function: linear;
 	&:hover {

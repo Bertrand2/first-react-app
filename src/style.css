@@ -44,7 +44,7 @@ body {
   color: #FF019A;
   font-family: lazer;
   z-index: 2;
-  animation: neonTitle 0.8s;
+  animation: neonTitle 2s;
   animation-fill-mode: forwards;
   animation-timing-function: linear;
 }

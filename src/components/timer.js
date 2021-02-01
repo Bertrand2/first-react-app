@@ -4,6 +4,14 @@ import Display from "./display";
 import Button from "./button";
 import LoadingBar from "./loading-bar";
 
+import fileAudioWork from "../assets/workTime.wav";
+import fileAudioBreak from "../assets/breakTime.wav";
+import fileAudioEnd from "../assets/end.wav";
+
+const audioWork = new Audio(fileAudioWork);
+const audioBreak = new Audio(fileAudioBreak);
+const audioEnd = new Audio(fileAudioEnd);
+
 const Timer = () => {
     const defaultWorkTime = 1500;
     const defaultBreakTime = 300;
@@ -50,14 +58,6 @@ const Timer = () => {
             center + Math.cos(Math.PI / 2 - angle) * radius,
             center - Math.sin(Math.PI / 2 - angle) * radius,
         ].join(" ");
-    };
-    const decrementTime = () => {
-        remainingTime && setRemainingTime(remainingTime - 1);
-        setWorkStatus(
-            (remainingTime - 1) % (breakTime + workTime) <= breakTime
-                ? "Break  Time !"
-                : "Work  Time !",
-        );
     };
     const timerStartStop = () => {
         if (status === "pause" || status === "reset") {
@@ -114,6 +114,22 @@ const Timer = () => {
     const cyclesReduce = () => {
         if (status === "reset" && cycles > 1) {
             setCycles(cycles - 1);
+        }
+    };
+    const decrementTime = () => {
+        remainingTime && setRemainingTime(remainingTime - 1);
+        setWorkStatus(
+            (remainingTime - 1) % (breakTime + workTime) <= breakTime
+                ? "Break  Time !"
+                : "Work  Time !",
+        );
+        if (remainingTime === 0) {
+            audioEnd.play();
+        } else if (remainingTime % (breakTime + workTime) === breakTime) {
+            audioBreak.play();
+        } else if (remainingTime % (breakTime + workTime) === 0) {
+            audioWork.play();
+            timerReset();
         }
     };
 
