@@ -3,6 +3,7 @@ import React, {useState, useEffect} from "react";
 import Display from "./display";
 import Button from "./button";
 import LoadingBar from "./loading-bar";
+import Modal from "./modal";
 
 import fileAudioWork from "../assets/workTime.wav";
 import fileAudioBreak from "../assets/breakTime.wav";
@@ -24,7 +25,9 @@ const Timer = () => {
     const [remainingTime, setRemainingTime] = useState(defaultTime);
     const [status, setStatus] = useState("reset");
     const [workStatus, setWorkStatus] = useState("Work  Time !");
-    let buttonContent;
+    const [activeModal, setActiveModal] = useState(false);
+    let buttonContent,
+        leny = 1;
     const loadingBar = {
         size: 32,
         width: 2,
@@ -116,6 +119,13 @@ const Timer = () => {
             setCycles(cycles - 1);
         }
     };
+    const modalDismiss = () => {
+        setActiveModal(false);
+    };
+    const modalRestart = () => {
+        setActiveModal(false);
+        timerStartStop();
+    };
     const decrementTime = () => {
         remainingTime && setRemainingTime(remainingTime - 1);
         setWorkStatus(
@@ -126,6 +136,7 @@ const Timer = () => {
         if (remainingTime === 0) {
             audioEnd.play();
             timerReset();
+            setActiveModal(true);
         } else if (remainingTime % (breakTime + workTime) === breakTime) {
             audioBreak.play();
         } else if (remainingTime % (breakTime + workTime) === 0) {
@@ -138,7 +149,11 @@ const Timer = () => {
         if (status === "play") {
             timerInterval = setInterval(decrementTime, 1000);
         }
-
+        document.title = `${
+            Math.floor(remainingTime / 60) >= 10
+                ? Math.floor(remainingTime / 60)
+                : `0${Math.floor(remainingTime / 60)}`
+        }:${`${remainingTime % 60}`.padStart(2, "0")} | Retromodoro`;
         return () => clearInterval(timerInterval);
     }, [status, remainingTime]);
 
@@ -146,6 +161,10 @@ const Timer = () => {
         setRemainingTime((workTime + breakTime) * cycles);
         setMaxTime((workTime + breakTime) * cycles);
     }, [workTime, breakTime, cycles]);
+
+    useEffect(() => {
+        leny = leny ? leny - 1 : leny + 1;
+    }, [activeModal]);
 
     return (
         <>
@@ -266,6 +285,11 @@ const Timer = () => {
                     </li>
                 </ul>
             </div>
+            <Modal
+                active={activeModal}
+                onClickDismiss={modalDismiss}
+                onClickRestart={modalRestart}
+            />
         </>
     );
 };
